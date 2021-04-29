@@ -150,56 +150,56 @@ function NavBar(props) {
   }, [setIsSideDrawerOpen]);
 
   const menuItems = [
-    {
-      link: "/c/dashboard",
-      name: "Dashboard",
-      onClick: closeMobileDrawer,
-      icon: {
-        desktop: (
-          <DashboardIcon
-            className={
-              selectedTab === "Dashboard" ? classes.textPrimary : "text-white"
-            }
-            fontSize="small"
-          />
-        ),
-        mobile: <DashboardIcon className="text-white" />,
-      },
-    },
-    {
-      link: "/c/posts",
-      name: "Posts",
-      onClick: closeMobileDrawer,
-      icon: {
-        desktop: (
-          <ImageIcon
-            className={
-              selectedTab === "Posts" ? classes.textPrimary : "text-white"
-            }
-            fontSize="small"
-          />
-        ),
-        mobile: <ImageIcon className="text-white" />,
-      },
-    },
-    {
-      link: "/c/subscription",
-      name: "Subscription",
-      onClick: closeMobileDrawer,
-      icon: {
-        desktop: (
-          <AccountBalanceIcon
-            className={
-              selectedTab === "Subscription"
-                ? classes.textPrimary
-                : "text-white"
-            }
-            fontSize="small"
-          />
-        ),
-        mobile: <AccountBalanceIcon className="text-white" />,
-      },
-    },
+    // {
+    //   link: "/c/dashboard",
+    //   name: "Dashboard",
+    //   onClick: closeMobileDrawer,
+    //   icon: {
+    //     desktop: (
+    //       <DashboardIcon
+    //         className={
+    //           selectedTab === "Dashboard" ? classes.textPrimary : "text-white"
+    //         }
+    //         fontSize="small"
+    //       />
+    //     ),
+    //     mobile: <DashboardIcon className="text-white" />,
+    //   },
+    // },
+    // {
+    //   link: "/c/posts",
+    //   name: "Posts",
+    //   onClick: closeMobileDrawer,
+    //   icon: {
+    //     desktop: (
+    //       <ImageIcon
+    //         className={
+    //           selectedTab === "Posts" ? classes.textPrimary : "text-white"
+    //         }
+    //         fontSize="small"
+    //       />
+    //     ),
+    //     mobile: <ImageIcon className="text-white" />,
+    //   },
+    // },
+    // {
+    //   link: "/c/subscription",
+    //   name: "Subscription",
+    //   onClick: closeMobileDrawer,
+    //   icon: {
+    //     desktop: (
+    //       <AccountBalanceIcon
+    //         className={
+    //           selectedTab === "Subscription"
+    //             ? classes.textPrimary
+    //             : "text-white"
+    //         }
+    //         fontSize="small"
+    //       />
+    //     ),
+    //     mobile: <AccountBalanceIcon className="text-white" />,
+    //   },
+    // },
     {
       link: "/",
       name: "Logout",
@@ -234,7 +234,7 @@ function NavBar(props) {
                 display="inline"
                 color="primary"
               >
-                Wa
+                PowerHouse
               </Typography>
               <Typography
                 variant="h4"
@@ -242,7 +242,7 @@ function NavBar(props) {
                 display="inline"
                 color="secondary"
               >
-                Ver
+              .ai
               </Typography>
             </Hidden>
           </Box>
@@ -252,16 +252,16 @@ function NavBar(props) {
             alignItems="center"
             width="100%"
           >
-            {isWidthUp("sm", width) && (
+            {/* {isWidthUp("sm", width) && (
               <Box mr={3}>
                 <Balance
                   balance={2573}
                   openAddBalanceDialog={openAddBalanceDialog}
                 />
               </Box>
-            )}
-            <MessagePopperButton messages={messages} />
-            <ListItem
+            )} */}
+            {/* <MessagePopperButton messages={messages} /> */}
+            {/* <ListItem
               disableGutters
               className={classNames(classes.iconListItem, classes.smBordered)}
             >
@@ -278,7 +278,7 @@ function NavBar(props) {
                   }
                 />
               )}
-            </ListItem>
+            </ListItem> */}
           </Box>
           <IconButton
             onClick={openDrawer}

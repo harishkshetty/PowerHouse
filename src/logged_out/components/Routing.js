@@ -4,6 +4,8 @@ import { Switch } from "react-router-dom";
 import PropsRoute from "../../shared/components/PropsRoute";
 import Home from "./home/Home";
 import Blog from "./blog/Blog";
+import ItemTable from "./home/ItemTable";
+
 import BlogPost from "./blog/BlogPost";
 
 function Routing(props) {
@@ -28,6 +30,13 @@ function Routing(props) {
         exact
         path="/blog"
         component={Blog}
+        selectBlog={selectBlog}
+        blogPosts={blogPosts}
+      />
+         <PropsRoute
+        exact
+        path="/pickItem/:orderId"
+        component={ItemTable}
         selectBlog={selectBlog}
         blogPosts={blogPosts}
       />

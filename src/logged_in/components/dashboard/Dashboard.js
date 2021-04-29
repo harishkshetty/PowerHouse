@@ -19,7 +19,7 @@ function Dashboard(props) {
   } = props;
 
   useEffect(selectDashboard, [selectDashboard]);
-
+alert("haiia");
   return (
     <Fragment>
       <StatisticsArea CardChart={CardChart} data={statistics} />

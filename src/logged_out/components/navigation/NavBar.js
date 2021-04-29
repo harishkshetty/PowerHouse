@@ -56,16 +56,6 @@ function NavBar(props) {
       icon: <HomeIcon className="text-white" />
     },
     {
-      link: "/blog",
-      name: "Blog",
-      icon: <BookIcon className="text-white" />
-    },
-    {
-      name: "Register",
-      onClick: openRegisterDialog,
-      icon: <HowToRegIcon className="text-white" />
-    },
-    {
       name: "Login",
       onClick: openLoginDialog,
       icon: <LockOpenIcon className="text-white" />
@@ -82,7 +72,7 @@ function NavBar(props) {
               display="inline"
               color="primary"
             >
-              Wa
+              PowerHouse
             </Typography>
             <Typography
               variant="h4"
@@ -90,7 +80,7 @@ function NavBar(props) {
               display="inline"
               color="secondary"
             >
-              Ver
+              .ai
             </Typography>
           </div>
           <div>

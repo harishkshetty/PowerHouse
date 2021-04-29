@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import Dashboard from "./dashboard/Dashboard";
+import EnhancedTable from "./dashboard/Table";
+
 import Posts from "./posts/Posts";
 import Subscription from "./subscription/Subscription";
 import PropsRoute from "../../shared/components/PropsRoute";
@@ -89,7 +91,7 @@ function Routing(props) {
         />
         <PropsRoute
           path=""
-          component={Dashboard}
+          component={EnhancedTable}
           toggleAccountActivation={toggleAccountActivation}
           pushMessageToSnackbar={pushMessageToSnackbar}
           CardChart={CardChart}
