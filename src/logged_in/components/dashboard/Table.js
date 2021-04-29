@@ -419,7 +419,7 @@ const TableList=(props)=> {
             Header: 'Location',
             accessor: 'location',
             // Filter: NumberRangeColumnFilter,
-            filter: 'equals',
+            filter: 'includes',
           },
           {
             Header: 'Description',
