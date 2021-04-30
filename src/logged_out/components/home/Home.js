@@ -12,7 +12,7 @@ function Home(props) {
   return (
     <Fragment>
       <HeadSection />
-      <FeatureSection />
+      {/* <FeatureSection /> */}
       {/* <PricingSection /> */}
     </Fragment>
   );

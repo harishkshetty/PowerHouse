@@ -52,12 +52,12 @@ function LoginDialog(props) {
   const login = useCallback(() => {
     setIsLoading(true);
     setStatus(null);
-    if (loginEmail.current.value !== "harish.s@circles.asia") {
+    if (loginEmail.current.value !== "kushal@powerhouse.ai") {
       setTimeout(() => {
         setStatus("invalidEmail");
         setIsLoading(false);
       }, 1500);
-    } else if (loginPassword.current.value !== "123") {
+    } else if (loginPassword.current.value !== "123456") {
       setTimeout(() => {
         setStatus("invalidPassword");
         setIsLoading(false);

@@ -105,6 +105,11 @@ function HeadSection(props) {
       <div className={classNames("lg-p-top", classes.wrapper)}>
         <div className={classNames("container-fluid", classes.container)}>
           <Box display="flex" justifyContent="center" className="row">
+            <Typography variant="h3" className="text-white">
+              Transforming your warehouse to a Powerhouse
+            </Typography>
+            <Typography variant="h6" color="primary" style={{width:'75%',textAlign:'center'}}>
+            We empower warehouse operators to maximize their productivity and simplify their work by providing state of the art AI-based sensor solutions            </Typography>
           </Box>
         </div>
       </div>

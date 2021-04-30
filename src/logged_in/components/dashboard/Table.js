@@ -1,5 +1,6 @@
 import React ,{useEffect,useState} from 'react'
 import styled from 'styled-components'
+import axios from 'axios';
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import Button from '@material-ui/core/Button';
@@ -377,21 +378,40 @@ const TableList=(props)=> {
   const [tableData,setTableData] = useState([]);
 
   useEffect(()=>{
-    fetch("https://jsonplaceholder.typicode.com/users")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        console.log(result,"Woka");
-        setTableData(result);
-      },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      (error) => {
-        // setIsLoaded(true);
-        // setError(error);
-      }
-    )
+    // fetch("http://54.254.213.97:8080/order/get?searchParam=All",{
+    //   mode: 'no-cors' 
+    // }
+    // .then(function(response){
+    //  console.log(response.json(),"Hola")
+    //  return response.json();
+    // })
+    // .then(
+    //   (result) => {
+    //     console.log(result,"Mainland");
+    //     setTableData(result);
+    //   },
+    //   // Note: it's important to handle errors here
+    //   // instead of a catch() block so that we don't swallow
+    //   // exceptions from actual bugs in components.
+    //   (error) => {
+    //     // setIsLoaded(true);
+    //     // setError(error);
+    //   }
+    // ))
+
+    axios.get('http://54.254.213.97:8080/order/get?searchParam=All',{ 'Access-Control-Allow-Origin':"*",'Content-Type': 'text/plain',"Access-Control-Allow-Headers":"content-type" })
+  .then(function (response) {
+    // handle success
+
+console.log(response,"Mailing")    
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
 
   },[])
   const columns = React.useMemo(
@@ -438,16 +458,20 @@ const TableList=(props)=> {
     []
   )
 
+  console.log(tableData,"Okay");
   const startPending = () => {
-    const order=mydata[0];
-    props.history.push(`/pickitem/${order.order_id}`);
+    const order= tableData.filter((item)=>{
+      return item.status==="PENDING";
+    })
+    const orderItem= (order.length>0&& order[0])||mydata[0];
+    props.history.push(`/pickitem/${orderItem.order_id}`);
   };
 
   // const data = React.useMemo(() => makeData(100000), [])
 
   return (
     <Styles>
-      <Table columns={columns} data={mydata} />
+      <Table columns={columns} data={tableData.length>0 && tableData|| mydata} />
       <div style={{display:'flex',justifyContent: 'center',marginTop:50}}>
        <Button onClick={startPending} variant="contained" color="secondary">
         Start Pending Orders

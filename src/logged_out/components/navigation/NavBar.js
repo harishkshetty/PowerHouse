@@ -50,11 +50,11 @@ function NavBar(props) {
     selectedTab
   } = props;
   const menuItems = [
-    {
-      link: "/",
-      name: "Home",
-      icon: <HomeIcon className="text-white" />
-    },
+    // {
+    //   link: "/",
+    //   name: "Home",
+    //   icon: <HomeIcon className="text-white" />
+    // },
     {
       name: "Login",
       onClick: openLoginDialog,

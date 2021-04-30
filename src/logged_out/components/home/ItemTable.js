@@ -36,16 +36,27 @@ const ItemTable = (props) => {
 const [orderList,setOrderList] = useState([]);
 // const [currentOrder,currentOrderList] = useState({});
 const [currentIndex,setCurrentIndex] = useState(0);
+const [color,setColor]=useState("#ffffff");
+const [ActualQuantity,setActualQuantity] =useState(0);
+
+const colorList={
+  0:"#FFFFFF",
+1:"#F3F30E",
+2:"#F30E30",
+3:"#49BC2C",
+}
 
  const {orderId}=props.match.params;
 
+ if(currentIndex > orderList.length){
+  props.history.push("/c/dashboard");
+}
 
  useEffect(()=>{
-  fetch(`https://jsonplaceholder.typicode.com/users/${orderId}`)
+  fetch(`http://54.254.213.97:8080/order/get?searchParam=order_id&searchStr=${orderId}`)
   .then(res => res.json())
   .then(
     (result) => {
-      console.log(result,"Woka");
       const data= [
         {
             "order_id": 904563,
@@ -90,40 +101,25 @@ const [currentIndex,setCurrentIndex] = useState(0);
 useEffect(() => {
   let intervalID;
   intervalID=setInterval(()=>{
-   console.log("Harish");
-   fetch(`https://jsonplaceholder.typicode.com/users/${orderId}`)
+   fetch("http://54.254.213.97:8080//get/actual_count",{ method: 'POST', 
+   headers: {
+     'Content-Type': 'application/json',
+   },
+   body: JSON.stringify({"sku_no" : orderList[currentIndex]['sku_no'],
+   "order_id" : orderList[currentIndex]['order_id']})})
    .then(res => res.json())
    .then(
-     (result) => {
-       console.log(result,"Woka");
-       const data= [
-         {
-             "order_id": 904563,
-             "sku_no": "TR-1",
-             "quantity": 10,
-             "location": "shelf-2",
-             "descriptions": "hey baby",
-             "status": "PENDING"
-         },
-         {
-             "order_id": 904563,
-             "sku_no": "TR-20",
-             "quantity": 12,
-             "location": "shelf-1",
-             "descriptions": "wassup meeen",
-             "status": "PENDING"
-         },
-         {
-             "order_id": 904563,
-             "sku_no": "TR-15",
-             "quantity": 10,
-             "location": "shelf-2",
-             "descriptions": "hey baby",
-             "status": "PENDING"
-         }
-     ]
-       
- 
+     (result) => {      
+     setColor(colorList[result['Screen_colour']]);
+     setActualQuantity(result['Actual_count']);
+     if(result['Screen_color']===3){
+      setCurrentIndex(currentIndex+1);
+      setActualQuantity(0);
+      setTimeout(() =>{
+       setColor("#ffffff");
+      },1000)
+     }
+
      },
      (error) => {
        // setIsLoaded(true);
@@ -132,7 +128,6 @@ useEffect(() => {
    
   },3000)
   return () => {
-    alert("hai");
     clearInterval(intervalID);
   }
 
@@ -147,7 +142,7 @@ const pickNextItem=()=>{
     <Styles>
       {orderList.length &&
       <div>
-      <table>
+      <table style={{backgroundColor:color}}>
         <tr>
           <th colspan="2" className="main">OrderId: {orderList[currentIndex].order_id}</th>
         </tr>
@@ -158,7 +153,7 @@ const pickNextItem=()=>{
         <tr>
           <td>
             <div>Quantity: {orderList[currentIndex].quantity}</div>
-            <div> Available Quantity: 0</div>
+            <div> Actual Quantity: {setActualQuantity}</div>
           </td>
           <td>Description: {orderList[currentIndex].descriptions}</td>
         </tr>
