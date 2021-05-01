@@ -109,7 +109,7 @@ const socialIcons = [
 function Footer(props) {
   const { classes, theme, width } = props;
   return (
-    <footer className="lg-p-top">
+    <footer className="lg-p-top" style={{position: 'fixed',bottom:0}}>
       <WaveBorder
         upperColor="#FFFFFF"
         lowerColor={theme.palette.common.darkBlack}

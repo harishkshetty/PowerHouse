@@ -62,6 +62,8 @@ const colorList={
       const order= result.filter((item)=>{
         return item.status==="PENDING";
       })
+      console.log(order.length);
+      order.length == 0 && toast.warn("No Pending Orders",{hideProgressBar: true,autoClose: 2000});
       setOrderList(order);
 
     },
@@ -121,6 +123,8 @@ const pickNextItem=()=>{
 
   return (
     <Styles>
+            <ToastContainer/>
+
       {(orderList.length>0 && currentIndex<=orderList.length) &&
       <div>
       <table style={{backgroundColor:color}}>
@@ -139,7 +143,6 @@ const pickNextItem=()=>{
           <td>Description: {orderList[currentIndex].descriptions}</td>
         </tr>
       </table>
-      <ToastContainer/>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
         <Button  onClick={pickNextItem} variant="contained" color="secondary">
           Next Item:
