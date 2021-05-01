@@ -102,13 +102,13 @@ function HeadSection(props) {
   const { classes, theme, width } = props;
   return (
     <Fragment>
-      <div className={classNames("lg-p-top", classes.wrapper)}>
+      <div className={classNames("lg-p-top", classes.wrapper)} style={{height:'79vh',display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
         <div className={classNames("container-fluid", classes.container)}>
           <Box display="flex" justifyContent="center" className="row">
-            <Typography variant="h3" className="text-white">
+            <Typography variant="h2" className="text-white" style={{textAlign:'center'}}>
               Transforming your warehouse to a Powerhouse
             </Typography>
-            <Typography variant="h6" color="primary" style={{width:'75%',textAlign:'center'}}>
+            <Typography variant="h5" color="primary" style={{width:'75%',textAlign:'center'}}>
             We empower warehouse operators to maximize their productivity and simplify their work by providing state of the art AI-based sensor solutions            </Typography>
           </Box>
         </div>
