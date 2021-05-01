@@ -10,7 +10,7 @@ const Styles = styled.div`
   margin-top:100px;
   margin-bottom:100px;
   position:relative;
-  z-index:1000;
+  // z-index:1000;
 
   table {
     border-spacing: 0;
@@ -62,7 +62,7 @@ const colorList={
   .then(
     (result) => {  
       const order= result.filter((item)=>{
-        return item.status==="PENDING";
+        return item.status ==="PENDING";
       })
       order.length == 0 && toast.warn("No Pending Orders",{hideProgressBar: true,autoClose: 2000});
       setOrderList(order);
@@ -95,7 +95,7 @@ useEffect(() => {
      setColor(colorList[result['Screen colour']]);
      setActualQuantity(result['Actual_count']);
      if(result['Screen colour']===3){
-      toast.success("Item Picked",{hideProgressBar: true,autoClose: 500});
+      toast.success("Item Picked",{hideProgressBar: true,autoClose: 1000});
       setTimeout(() => {
       setCurrentIndex(currentIndex+1);
        setActualQuantity(0);
@@ -118,7 +118,7 @@ useEffect(() => {
 
 
 const pickNextItem=()=>{
-  if(currentIndex<orderList.length-1){
+  if(currentIndex <=orderList.length-1){
     fetch("http://pickngobackend.xyz/post/skip_sku",{ method: 'POST', 
     headers: {
       'Content-Type': 'application/json',

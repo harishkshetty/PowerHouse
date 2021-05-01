@@ -109,12 +109,12 @@ const socialIcons = [
 function Footer(props) {
   const { classes, theme, width } = props;
   return (
-    <footer className="lg-p-top" style={{position: 'fixed',bottom:0}}>
-      <WaveBorder
+    <footer className="lg-p-top" style={{position: 'fixed',bottom:-75}}>
+      {/* <WaveBorder
         upperColor="#FFFFFF"
         lowerColor={theme.palette.common.darkBlack}
         animationNegativeDelay={4}
-      />
+      /> */}
       <div className={classes.footerInner}>
         <Grid container spacing={isWidthUp("md", width) ? 10 : 5}>
           <Grid item xs={12} md={6} lg={4}>
