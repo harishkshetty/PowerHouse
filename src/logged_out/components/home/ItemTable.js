@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Styles = styled.div`
   padding: 1rem;
   margin-top:100px;
+  margin-bottom:100px;
 
   table {
     border-spacing: 0;
@@ -49,8 +50,7 @@ const colorList={
 }
 
  const {orderId}=props.match.params;
-
- if(currentIndex > orderList.length){
+ if(currentIndex >= orderList.length && orderList.length>0){
   props.history.push("/c/dashboard");
 }
 
@@ -62,7 +62,6 @@ const colorList={
       const order= result.filter((item)=>{
         return item.status==="PENDING";
       })
-      console.log(order.length);
       order.length == 0 && toast.warn("No Pending Orders",{hideProgressBar: true,autoClose: 2000});
       setOrderList(order);
 
@@ -80,7 +79,7 @@ const colorList={
 
 useEffect(() => {
   let intervalID;
-  if(orderList.length>0){
+  if(orderList.length>0 && currentIndex<orderList.length){
   intervalID=setInterval(()=>{
    fetch("http://54.254.213.97:8080//get/actual_count",{ method: 'POST', 
    headers: {
@@ -94,7 +93,7 @@ useEffect(() => {
      setColor(colorList[result['Screen colour']]);
      setActualQuantity(result['Actual_count']);
      if(result['Screen colour']===3){
-      toast.success("Item Picked",{hideProgressBar: true,autoClose: 1000});
+      toast.success("Item Picked",{hideProgressBar: true,autoClose: 500});
       setTimeout(() => {
       setCurrentIndex(currentIndex+1);
        setActualQuantity(0);
@@ -117,6 +116,19 @@ useEffect(() => {
 
 
 const pickNextItem=()=>{
+  // if(currentIndex<orderList.length-1){
+  //   fetch(`http://54.254.213.97:8080/order/get?searchParam=sku_no&searchStr=${orderList[currentIndex]['sku_no']}}`)
+  //   .then(res => res.json())
+  //   .then(
+  //     (result) => {  
+  
+  //     },
+  //     (error) => {
+       
+  //     }
+  //   )
+  // }
+
   currentIndex<orderList.length-1 ? setCurrentIndex(currentIndex+1):props.history.push("/c/dashboard");
   currentIndex<orderList.length-1 && setColor("#ffffff");
 }
@@ -125,7 +137,7 @@ const pickNextItem=()=>{
     <Styles>
             <ToastContainer/>
 
-      {(orderList.length>0 && currentIndex<=orderList.length) &&
+      {(orderList.length>0 && currentIndex<=orderList.length-1) &&
       <div>
       <table style={{backgroundColor:color}}>
         <tr>

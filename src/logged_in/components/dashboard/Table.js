@@ -462,10 +462,10 @@ const TableList=(props)=> {
 
   const startPending = () => {
     const order= tableData.filter((item)=>{
-      return item.status==="PENDING";
+      return item.status === "PENDING";
     })
     const orderItem= (order.length>0&& order[0]);
-    orderItem.length>0 ? props.history.push(`/pickitem/${orderItem.order_id}`): toast.warn("There is No pending Order",{hideProgressBar: true,autoClose: 1000});
+    orderItem? props.history.push(`/pickitem/${orderItem.order_id}`): toast.warn("There is No pending Order",{hideProgressBar: true,autoClose: 1000});
   };
 
   // const data = React.useMemo(() => makeData(100000), [])

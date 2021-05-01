@@ -179,8 +179,7 @@ function Footer(props) {
               About the Company
             </Typography>
             <Typography style={{ color: "#8f9296" }} paragraph>
-              Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce
-              euismod convallis velit, eu auctor lacus vehicula sit amet.
+            We want to help warehouses capturing these digital efficiency gains without having to invest in expensive automation solutions by making picking as easy as Picking & Going.
             </Typography>
             <Box display="flex">
               {socialIcons.map((socialIcon, index) => (

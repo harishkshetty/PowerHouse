@@ -8,7 +8,7 @@ const styles = {
     width: "100%",
     marginBottom: -7,
     height: "7vw",
-    minHeight: "7vw"
+    minHeight: "5vw"
   },
   "@keyframes moveForever": {
     from: { transform: "translate3d(-90px, 0, 0)" },
