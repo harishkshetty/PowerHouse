@@ -9,6 +9,8 @@ const Styles = styled.div`
   padding: 1rem;
   margin-top:100px;
   margin-bottom:100px;
+  position:relative;
+  z-index:1000;
 
   table {
     border-spacing: 0;
