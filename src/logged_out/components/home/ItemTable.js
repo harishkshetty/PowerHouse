@@ -116,18 +116,18 @@ useEffect(() => {
 
 
 const pickNextItem=()=>{
-  // if(currentIndex<orderList.length-1){
-  //   fetch(`http://54.254.213.97:8080/order/get?searchParam=sku_no&searchStr=${orderList[currentIndex]['sku_no']}}`)
-  //   .then(res => res.json())
-  //   .then(
-  //     (result) => {  
-  
-  //     },
-  //     (error) => {
-       
-  //     }
-  //   )
-  // }
+  if(currentIndex<orderList.length-1){
+    fetch("http://54.254.213.97:8080/post/skip_sku",{ method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({"sku_no" : orderList[currentIndex]['sku_no'],
+    "order_id" : orderList[currentIndex]['order_id']})})
+    .then(res => res.json())
+    .then(
+      (result) => {},
+      (error) => {})
+  }
 
   currentIndex<orderList.length-1 ? setCurrentIndex(currentIndex+1):props.history.push("/c/dashboard");
   currentIndex<orderList.length-1 && setColor("#ffffff");
