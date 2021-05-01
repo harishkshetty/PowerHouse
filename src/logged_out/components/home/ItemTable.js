@@ -1,6 +1,8 @@
 import React,{useEffect,useState} from "react";
 import Button from "@material-ui/core/Button";
 import styled from 'styled-components'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Styles = styled.div`
@@ -56,35 +58,11 @@ const colorList={
   fetch(`http://54.254.213.97:8080/order/get?searchParam=order_id&searchStr=${orderId}`)
   .then(res => res.json())
   .then(
-    (result) => {
-      const data= [
-        {
-            "order_id": 904563,
-            "sku_no": "TR-1",
-            "quantity": 10,
-            "location": "shelf-2",
-            "descriptions": "hey baby",
-            "status": "PENDING"
-        },
-        {
-            "order_id": 904563,
-            "sku_no": "TR-20",
-            "quantity": 12,
-            "location": "shelf-1",
-            "descriptions": "wassup meeen",
-            "status": "PENDING"
-        },
-        {
-            "order_id": 904563,
-            "sku_no": "TR-15",
-            "quantity": 10,
-            "location": "shelf-2",
-            "descriptions": "hey baby",
-            "status": "PENDING"
-        }
-    ]
-      
-      setOrderList(data);
+    (result) => {  
+      const order= result.filter((item)=>{
+        return item.status==="PENDING";
+      })
+      setOrderList(order);
 
     },
     // Note: it's important to handle errors here
@@ -100,6 +78,7 @@ const colorList={
 
 useEffect(() => {
   let intervalID;
+  if(orderList.length>0){
   intervalID=setInterval(()=>{
    fetch("http://54.254.213.97:8080//get/actual_count",{ method: 'POST', 
    headers: {
@@ -109,17 +88,17 @@ useEffect(() => {
    "order_id" : orderList[currentIndex]['order_id']})})
    .then(res => res.json())
    .then(
-     (result) => {      
-     setColor(colorList[result['Screen_colour']]);
+     (result) => {  
+     setColor(colorList[result['Screen colour']]);
      setActualQuantity(result['Actual_count']);
-     if(result['Screen_color']===3){
+     if(result['Screen colour']===3){
+      toast.success("Item Picked",{hideProgressBar: true,autoClose: 1000});
+      setTimeout(() => {
       setCurrentIndex(currentIndex+1);
-      setActualQuantity(0);
-      setTimeout(() =>{
+       setActualQuantity(0);
        setColor("#ffffff");
-      },1000)
-     }
-
+     },1000);
+    }
      },
      (error) => {
        // setIsLoaded(true);
@@ -130,17 +109,19 @@ useEffect(() => {
   return () => {
     clearInterval(intervalID);
   }
+  }
 
-
-},[])
+},[orderList,currentIndex])
 
 
 const pickNextItem=()=>{
-  currentIndex<orderList.length-1 && setCurrentIndex(currentIndex+1);
+  currentIndex<orderList.length-1 ? setCurrentIndex(currentIndex+1):props.history.push("/c/dashboard");
+  currentIndex<orderList.length-1 && setColor("#ffffff");
 }
+
   return (
     <Styles>
-      {orderList.length &&
+      {(orderList.length>0 && currentIndex<=orderList.length) &&
       <div>
       <table style={{backgroundColor:color}}>
         <tr>
@@ -153,11 +134,12 @@ const pickNextItem=()=>{
         <tr>
           <td>
             <div>Quantity: {orderList[currentIndex].quantity}</div>
-            <div> Actual Quantity: {setActualQuantity}</div>
+            <div> Actual Quantity: {ActualQuantity}</div>
           </td>
           <td>Description: {orderList[currentIndex].descriptions}</td>
         </tr>
       </table>
+      <ToastContainer/>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
         <Button  onClick={pickNextItem} variant="contained" color="secondary">
           Next Item:

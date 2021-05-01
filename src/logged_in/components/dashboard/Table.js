@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import axios from 'axios';
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-table'
 // A great library for fuzzy filtering/sorting items
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Button from '@material-ui/core/Button';
 
 import {matchSorter} from 'match-sorter'
@@ -402,8 +404,7 @@ const TableList=(props)=> {
     axios.get('http://54.254.213.97:8080/order/get?searchParam=All',{ 'Access-Control-Allow-Origin':"*",'Content-Type': 'text/plain',"Access-Control-Allow-Headers":"content-type" })
   .then(function (response) {
     // handle success
-
-console.log(response,"Mailing")    
+    setTableData(response.data);
   })
   .catch(function (error) {
     // handle error
@@ -458,13 +459,12 @@ console.log(response,"Mailing")
     []
   )
 
-  console.log(tableData,"Okay");
   const startPending = () => {
     const order= tableData.filter((item)=>{
       return item.status==="PENDING";
     })
-    const orderItem= (order.length>0&& order[0])||mydata[0];
-    props.history.push(`/pickitem/${orderItem.order_id}`);
+    const orderItem= (order.length>0&& order[0]);
+    orderItem.length>0 ? props.history.push(`/pickitem/${orderItem.order_id}`): toast.warn("There is No pending Order",{hideProgressBar: true,autoClose: 1000});
   };
 
   // const data = React.useMemo(() => makeData(100000), [])
@@ -472,6 +472,7 @@ console.log(response,"Mailing")
   return (
     <Styles>
       <Table columns={columns} data={tableData.length>0 && tableData|| mydata} />
+      <ToastContainer/>
       <div style={{display:'flex',justifyContent: 'center',marginTop:50}}>
        <Button onClick={startPending} variant="contained" color="secondary">
         Start Pending Orders

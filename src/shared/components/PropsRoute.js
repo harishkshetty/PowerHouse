@@ -4,7 +4,6 @@ import { Route } from "react-router-dom";
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
-  console.log(component,"MochaRey");
   return React.createElement(component, finalProps);
 };
 
