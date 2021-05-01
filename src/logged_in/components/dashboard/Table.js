@@ -380,7 +380,7 @@ const TableList=(props)=> {
   const [tableData,setTableData] = useState([]);
 
   useEffect(()=>{
-    // fetch("http://54.254.213.97:8080/order/get?searchParam=All",{
+    // fetch("http://pickngobackend.xyz/order/get?searchParam=All",{
     //   mode: 'no-cors' 
     // }
     // .then(function(response){
@@ -401,7 +401,7 @@ const TableList=(props)=> {
     //   }
     // ))
 
-    axios.get('http://54.254.213.97:8080/order/get?searchParam=All',{ 'Access-Control-Allow-Origin':"*",'Content-Type': 'text/plain',"Access-Control-Allow-Headers":"content-type" })
+    axios.get('http://pickngobackend.xyz/order/get?searchParam=All',{ 'Access-Control-Allow-Origin':"*",'Content-Type': 'text/plain',"Access-Control-Allow-Headers":"content-type" })
   .then(function (response) {
     // handle success
     setTableData(response.data);

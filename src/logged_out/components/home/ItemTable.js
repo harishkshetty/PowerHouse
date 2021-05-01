@@ -55,7 +55,7 @@ const colorList={
 }
 
  useEffect(()=>{
-  fetch(`http://54.254.213.97:8080/order/get?searchParam=order_id&searchStr=${orderId}`)
+  fetch(`http://pickngobackend.xyz/order/get?searchParam=order_id&searchStr=${orderId}`)
   .then(res => res.json())
   .then(
     (result) => {  
@@ -81,7 +81,7 @@ useEffect(() => {
   let intervalID;
   if(orderList.length>0 && currentIndex<orderList.length){
   intervalID=setInterval(()=>{
-   fetch("http://54.254.213.97:8080//get/actual_count",{ method: 'POST', 
+   fetch("http://pickngobackend.xyz//get/actual_count",{ method: 'POST', 
    headers: {
      'Content-Type': 'application/json',
    },
@@ -117,7 +117,7 @@ useEffect(() => {
 
 const pickNextItem=()=>{
   if(currentIndex<orderList.length-1){
-    fetch("http://54.254.213.97:8080/post/skip_sku",{ method: 'POST', 
+    fetch("http://pickngobackend.xyz/post/skip_sku",{ method: 'POST', 
     headers: {
       'Content-Type': 'application/json',
     },
