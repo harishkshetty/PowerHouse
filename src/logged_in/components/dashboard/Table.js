@@ -408,6 +408,7 @@ const TableList=(props)=> {
   })
   .catch(function (error) {
     // handle error
+    toast.error("Something went wrong",{hideProgressBar: true,autoClose: 1000});
     console.log(error);
   })
   .then(function () {
@@ -471,7 +472,7 @@ const TableList=(props)=> {
 
   return (
     <Styles>
-      <Table columns={columns} data={tableData.length>0 && tableData|| mydata} />
+      <Table columns={columns} data={tableData.length>0 && tableData|| []} />
       <ToastContainer/>
       <div style={{display:'flex',justifyContent: 'center',marginTop:50}}>
        <Button onClick={startPending} variant="contained" color="secondary">
